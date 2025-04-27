@@ -1,0 +1,19 @@
+{
+  "name": "wacodeweb",
+  "version": "1.0.0",
+  "description": "a",
+  "main": "index.js",
+  "scripts": {
+    "test": "node test.js"
+  },
+  "keywords": [
+    "restful"
+  ],
+  "author": "wacode",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^5.1.0",
+    "hono": "^4.7.7",
+    "typescript": "^5.8.3"
+  }
+}
