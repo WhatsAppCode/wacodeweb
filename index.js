@@ -1,33 +1,40 @@
-const express = require('express')
-const app = express()
-const path = require('path')
-const SoundCloud = require("soundcloud-scraper");
-const client = new SoundCloud.Client();
-const fs = require("fs");
+var express = require('express');
+var bodyParser = require('body-parser');
+var morgan = require('morgan');
+var app = express();
+var autoLoadRoutes = require('./routeLoader');
+const PORT = process.env.PORT || 80;
 
-app.get('/test', (req, res) => {
-res.send('hello ngentod')
-})
+app.use(morgan('dev'));
+app.use(express.static('client'));
 
-app.get('/', function(req, res){
-res.sendFile(path.join(__dirname, './index.html'));
-})
+app.use(express.json());
 
-app.get('/sounddl', function(req, res){
-client.getSongInfo(req.query.url)
-    .then(async song => {
-        const stream = await song.downloadProgressive();
-        const writer = stream.pipe(fs.createWriteStream(`./${song.title}.mp3`));
-        writer.on("finish", () => {
-          console.log("Finished writing song!")
-        });
-    })
-    .catch(console.error);
-})
+const availableEndpoints = autoLoadRoutes(app);
+
+app.use((req, res, next) => {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept,recording-session");
+    next();
+});
+
+app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.json());
 
 
-app.listen(3000, () => {
-console.log(`running on port: 3000`)
-})
+app.use((req, res) => {
+  res.status(404).json({
+    error: 'not available',
+    requested: {
+      method: req.method,
+      path: req.originalUrl,
+    },
+    availableEndpoints: availableEndpoints.length > 0 ? availableEndpoints : 'Tidak ada endpoint yang tersedia',
+  });
+});
+
+app.listen(PORT, () => {
+    console.log(`Server Run on port ${PORT} `)
+});
 
 

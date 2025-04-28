@@ -14,6 +14,7 @@
   "dependencies": {
     "express": "^5.1.0",
     "hono": "^4.7.7",
+    "morgan": "^1.10.0",
     "path": "^0.12.7",
     "soundcloud-scraper": "^5.0.3",
     "typescript": "^5.8.3"
