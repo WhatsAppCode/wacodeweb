@@ -3,7 +3,7 @@ var bodyParser = require('body-parser');
 var morgan = require('morgan');
 var app = express();
 var autoLoadRoutes = require('./routeLoader');
-const PORT = process.env.PORT || 80;
+const PORT = process.env.PORT || 3000;
 
 app.use(morgan('dev'));
 app.use(express.static('client'));
@@ -29,7 +29,7 @@ app.use((req, res) => {
       method: req.method,
       path: req.originalUrl,
     },
-    availableEndpoints: availableEndpoints.length > 0 ? availableEndpoints : 'Tidak ada endpoint yang tersedia',
+    availableEndpoints: availableEndpoints.length > 0 ? availableEndpoints : 'no one available endpoints',
   });
 });
 

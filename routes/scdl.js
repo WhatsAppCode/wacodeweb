@@ -13,6 +13,8 @@ client.getSongInfo(req.query.url)
         const writer = stream.pipe(fs.createWriteStream(`./${song.title}.mp3`));
         writer.on("finish", () => {
           console.log("Finished writing song!")
+          const filePath = path.join(__dirname, `../${song.title}.mp3`); 
+          res.sendFile(filePath);
         });
     })
     .catch(console.error);
