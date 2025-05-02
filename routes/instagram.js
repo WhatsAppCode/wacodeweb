@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const { instagramGetUrl } = require("instagram-url-direct");
 
-router.get('/instagram', async (req, res) => {
+router.get('/', async (req, res) => {
   const { url } = req.query;
   if (!url) {
     return res.status(400).json({ error: 'Parameter URL Instagram diperlukan' });
