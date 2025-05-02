@@ -12,9 +12,12 @@
   "author": "wacode",
   "license": "ISC",
   "dependencies": {
+    "@nechlophomeriaa/spotifydl": "^1.0.31",
     "@tobyg74/tiktok-api-dl": "^1.2.8",
+    "body-parser": "^2.2.0",
     "express": "^5.1.0",
     "hono": "^4.7.7",
+    "instagram-url-direct": "^2.0.3",
     "morgan": "^1.10.0",
     "path": "^0.12.7",
     "soundcloud-scraper": "^5.0.3",
